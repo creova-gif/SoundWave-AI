@@ -66,9 +66,9 @@
 }
 
 @theme inline {
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Geist Mono', monospace;
-  --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', sans-serif;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -121,6 +121,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Entrance animations (CSS-only, no hydration issues) ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.7; }
+  50%       { transform: scale(1.12); opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+
+.anim-fade-up   { animation: fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-fade-in   { animation: fade-in 0.6s ease both; }
+.anim-d1 { animation-delay: 0.05s; }
+.anim-d2 { animation-delay: 0.18s; }
+.anim-d3 { animation-delay: 0.32s; }
+.anim-d4 { animation-delay: 0.46s; }
+.anim-d5 { animation-delay: 0.60s; }
+.anim-d6 { animation-delay: 0.74s; }
+.anim-d7 { animation-delay: 0.88s; }
+.anim-orb { animation: orb-pulse 7s ease-in-out infinite; }
+.anim-orb-2 { animation: orb-pulse 9s ease-in-out infinite reverse; }
+.anim-float { animation: float 4s ease-in-out infinite; }
+.anim-float-2 { animation: float 5s ease-in-out infinite; animation-delay: 0.8s; }
+.anim-float-3 { animation: float 4.5s ease-in-out infinite; animation-delay: 1.2s; }
 
 @layer utilities {
   /* Glassmorphism */
@@ -257,7 +293,8 @@
   /* Font Display */
   .font-display {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
   }
 }

@@ -1,20 +1,19 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, Bricolage_Grotesque, JetBrains_Mono } from 'next/font/google'
+import { DM_Sans, Unbounded, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const plusJakartaSans = Plus_Jakarta_Sans({ 
+const dmSans = DM_Sans({ 
   subsets: ["latin"],
   variable: '--font-sans',
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
-const bricolageGrotesque = Bricolage_Grotesque({ 
+const unbounded = Unbounded({ 
   subsets: ["latin"],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 const jetbrainsMono = JetBrains_Mono({ 
@@ -57,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`bg-background ${plusJakartaSans.variable} ${bricolageGrotesque.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`bg-background ${dmSans.variable} ${unbounded.variable} ${jetbrainsMono.variable}`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
