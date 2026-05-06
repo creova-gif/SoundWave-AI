@@ -9,49 +9,44 @@ import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { CheckCircle2, XCircle, Link2, ExternalLink, Users, RefreshCw, Settings } from 'lucide-react'
 import { store } from '@/lib/store'
+import { PlatformIcon } from '@/components/icons/platform-icons'
 import type { Platform, PlatformCredential } from '@/lib/types'
 
-const platformConfig: Record<Platform, { label: string; color: string; bgColor: string; icon: string; description: string }> = {
+const platformConfig: Record<Platform, { label: string; color: string; bgColor: string; description: string }> = {
   tiktok: { 
     label: 'TikTok', 
     color: 'text-[#00f2ea]', 
     bgColor: 'bg-[#00f2ea]/10',
-    icon: '🎵',
     description: 'Short-form video platform with massive viral potential'
   },
   instagram: { 
     label: 'Instagram', 
     color: 'text-pink-400', 
     bgColor: 'bg-pink-500/10',
-    icon: '📸',
     description: 'Visual storytelling through Reels, Stories, and Feed posts'
   },
   youtube: { 
     label: 'YouTube', 
     color: 'text-red-500', 
     bgColor: 'bg-red-500/10',
-    icon: '▶️',
     description: 'Video platform for Shorts and long-form content'
   },
   twitter: { 
     label: 'X / Twitter', 
     color: 'text-foreground', 
     bgColor: 'bg-foreground/10',
-    icon: '𝕏',
     description: 'Real-time engagement and trending conversations'
   },
   facebook: { 
     label: 'Facebook', 
     color: 'text-blue-500', 
     bgColor: 'bg-blue-500/10',
-    icon: '📘',
     description: 'Community building and paid amplification'
   },
   spotify: { 
     label: 'Spotify', 
     color: 'text-green-500', 
     bgColor: 'bg-green-500/10',
-    icon: '🎧',
     description: 'Music streaming and playlist promotion'
   },
 }
@@ -134,8 +129,8 @@ export default function PlatformsPage() {
               const config = platformConfig[cred.platform]
               return (
                 <div key={cred.platform} className="flex flex-col items-center gap-2 text-center">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-full ${config.bgColor} text-2xl`}>
-                    {config.icon}
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-full ${config.bgColor}`}>
+                    <PlatformIcon platform={cred.platform} size={28} />
                   </div>
                   <span className="text-xs font-medium">{config.label}</span>
                   {cred.connected ? (
@@ -160,8 +155,8 @@ export default function PlatformsPage() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${config.bgColor} text-xl`}>
-                      {config.icon}
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${config.bgColor}`}>
+                      <PlatformIcon platform={cred.platform} size={24} />
                     </div>
                     <div>
                       <CardTitle className="text-lg">{config.label}</CardTitle>

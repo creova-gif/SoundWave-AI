@@ -1,19 +1,20 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { PlatformIcon } from '@/components/icons/platform-icons'
 import type { Platform } from '@/lib/types'
 
 interface PlatformBreakdownProps {
   data: { platform: Platform; reach: number; percentage: number }[]
 }
 
-const platformConfig: Record<Platform, { label: string; color: string; icon: string }> = {
-  tiktok: { label: 'TikTok', color: 'bg-[#00f2ea]', icon: '🎵' },
-  instagram: { label: 'Instagram', color: 'bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]', icon: '📸' },
-  youtube: { label: 'YouTube', color: 'bg-[#ff0000]', icon: '▶️' },
-  twitter: { label: 'X / Twitter', color: 'bg-foreground', icon: '𝕏' },
-  facebook: { label: 'Facebook', color: 'bg-[#1877f2]', icon: '📘' },
-  spotify: { label: 'Spotify', color: 'bg-[#1db954]', icon: '🎧' },
+const platformConfig: Record<Platform, { label: string; color: string }> = {
+  tiktok: { label: 'TikTok', color: 'bg-[#00f2ea]' },
+  instagram: { label: 'Instagram', color: 'bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]' },
+  youtube: { label: 'YouTube', color: 'bg-[#ff0000]' },
+  twitter: { label: 'X / Twitter', color: 'bg-foreground' },
+  facebook: { label: 'Facebook', color: 'bg-[#1877f2]' },
+  spotify: { label: 'Spotify', color: 'bg-[#1db954]' },
 }
 
 export function PlatformBreakdown({ data }: PlatformBreakdownProps) {
@@ -35,7 +36,7 @@ export function PlatformBreakdown({ data }: PlatformBreakdownProps) {
             <div key={item.platform} className="space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center gap-2">
-                  <span>{config.icon}</span>
+                  <PlatformIcon platform={item.platform} size={16} />
                   <span className="font-medium">{config.label}</span>
                 </div>
                 <div className="flex items-center gap-2">

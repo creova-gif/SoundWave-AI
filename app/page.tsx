@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { PlatformIcon } from '@/components/icons/platform-icons'
 import {
   Music,
   Zap,
@@ -18,12 +19,12 @@ import {
 } from 'lucide-react'
 
 const platforms = [
-  { name: 'TikTok', color: 'bg-[#00f2ea]' },
-  { name: 'Instagram', color: 'bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045]' },
-  { name: 'YouTube', color: 'bg-[#ff0000]' },
-  { name: 'Twitter/X', color: 'bg-foreground' },
-  { name: 'Facebook', color: 'bg-[#1877f2]' },
-  { name: 'Spotify', color: 'bg-[#1db954]' },
+  { name: 'TikTok', platform: 'tiktok' as const },
+  { name: 'Instagram', platform: 'instagram' as const },
+  { name: 'YouTube', platform: 'youtube' as const },
+  { name: 'Twitter/X', platform: 'twitter' as const },
+  { name: 'Facebook', platform: 'facebook' as const },
+  { name: 'Spotify', platform: 'spotify' as const },
 ]
 
 const features = [
@@ -128,7 +129,7 @@ export default function LandingPage() {
                 key={platform.name}
                 className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2"
               >
-                <div className={`h-3 w-3 rounded-full ${platform.color}`} />
+                <PlatformIcon platform={platform.platform} size={18} />
                 <span className="text-sm">{platform.name}</span>
               </div>
             ))}
