@@ -34,6 +34,8 @@ AI-powered music marketing command center that autonomously generates content, p
 
 - Webpack used instead of Turbopack (`--webpack` flag) — Turbopack fails to build Tailwind v4 CSS that contains `mask-image: url(...)` arbitrary value utilities
 - `css-loader` configured with `url: false` via `next.config.mjs` webpack override to prevent resolution of CSS url() patterns as module paths
+- `typedRoutes: false` — prevents Next.js 16 from regenerating `.next/dev/types/routes.d.ts` on every compile (which `next-env.d.ts` imports, causing a rebuild loop)
+- `watchOptions.ignored` excludes `.local/**` — Replit writes to `.local/state/replit/agent/.latest.json` constantly; without this exclusion webpack rebuilds on every agent heartbeat
 - Dark-only theme (no light mode variant), custom oklch color palette
 - AI agents are simulated/demo mode — no real platform API keys required by default
 
@@ -55,7 +57,8 @@ _Populate as you build_
 ## Gotchas
 
 - Must run with `--webpack` flag — Turbopack breaks Tailwind v4 CSS processing
-- `next.config.mjs` has a webpack override that sets `css-loader url: false` — don't remove it
+- `next.config.mjs` webpack override sets `css-loader url: false` AND `watchOptions.ignored` — do not remove either
+- The `.local/` directory is written by the Replit agent runtime; it must stay in `watchOptions.ignored` or webpack will rebuild constantly
 
 ## Pointers
 
