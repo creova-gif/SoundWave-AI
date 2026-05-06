@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Music2, Zap, ArrowRight, Eye, EyeOff, Loader2, Radio, BarChart3, Globe } from 'lucide-react'
@@ -9,7 +9,10 @@ import { Input } from '@/components/ui/input'
 
 export default function LoginPage() {
   const router = useRouter()
+  const [mounted, setMounted] = useState(false)
   const [mode, setMode] = useState<'login' | 'register'>('login')
+
+  useEffect(() => { setMounted(true) }, [])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
@@ -79,7 +82,7 @@ export default function LoginPage() {
           {/* Main copy */}
           <div className="flex-1 flex flex-col justify-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={mounted ? { opacity: 0, y: 30 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
@@ -96,7 +99,7 @@ export default function LoginPage() {
 
             {/* Feature pills */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={mounted ? { opacity: 0, y: 20 } : false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
               className="space-y-3"
@@ -134,7 +137,7 @@ export default function LoginPage() {
 
           <motion.div
             key={mode}
-            initial={{ opacity: 0, y: 12 }}
+            initial={mounted ? { opacity: 0, y: 12 } : false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
@@ -150,7 +153,7 @@ export default function LoginPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <AnimatePresence>
+              <AnimatePresence initial={false}>
                 {mode === 'register' && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
