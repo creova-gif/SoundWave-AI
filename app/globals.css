@@ -4,68 +4,65 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* CREOVA Viral Engine - Deep Graphite + Neon Theme */
-  --background: oklch(0.08 0.01 280);
-  --foreground: oklch(0.95 0.01 280);
-  --card: oklch(0.12 0.01 280);
-  --card-foreground: oklch(0.95 0.01 280);
-  --popover: oklch(0.10 0.01 280);
-  --popover-foreground: oklch(0.95 0.01 280);
-  
-  /* Electric Cyan Primary */
-  --primary: oklch(0.75 0.18 195);
-  --primary-foreground: oklch(0.08 0 0);
-  
-  /* Magenta Accent */
-  --secondary: oklch(0.65 0.22 330);
-  --secondary-foreground: oklch(0.95 0 0);
-  
-  /* Soft Purple */
-  --muted: oklch(0.18 0.02 280);
-  --muted-foreground: oklch(0.65 0.02 280);
-  
-  /* Accent - Cyan Glow */
-  --accent: oklch(0.70 0.16 195);
-  --accent-foreground: oklch(0.08 0 0);
-  
+  /* SoundWave AI — Warm Dark Theme (Habitline-inspired) */
+  --background: oklch(0.08 0.022 40);
+  --foreground: oklch(0.97 0.005 60);
+  --card: oklch(0.12 0.018 40);
+  --card-foreground: oklch(0.97 0.005 60);
+  --popover: oklch(0.10 0.018 40);
+  --popover-foreground: oklch(0.97 0.005 60);
+
+  /* Warm Amber Primary */
+  --primary: oklch(0.70 0.16 46);
+  --primary-foreground: oklch(0.10 0 0);
+
+  --secondary: oklch(0.18 0.022 40);
+  --secondary-foreground: oklch(0.90 0.005 60);
+
+  --muted: oklch(0.16 0.018 40);
+  --muted-foreground: oklch(0.55 0.025 50);
+
+  --accent: oklch(0.66 0.14 46);
+  --accent-foreground: oklch(0.10 0 0);
+
   --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.95 0 0);
-  
-  --border: oklch(0.22 0.02 280);
-  --input: oklch(0.15 0.01 280);
-  --ring: oklch(0.75 0.18 195);
-  
-  /* Chart Colors - Neon Palette */
-  --chart-1: oklch(0.75 0.18 195); /* Cyan */
-  --chart-2: oklch(0.65 0.22 330); /* Magenta */
-  --chart-3: oklch(0.60 0.18 280); /* Purple */
-  --chart-4: oklch(0.70 0.15 150); /* Teal */
-  --chart-5: oklch(0.75 0.12 80);  /* Gold */
-  
-  --radius: 0.75rem;
-  
+  --destructive-foreground: oklch(0.97 0 0);
+
+  --border: oklch(0.21 0.022 40);
+  --input: oklch(0.15 0.018 40);
+  --ring: oklch(0.70 0.16 46);
+
+  /* Chart Colors — Warm Palette */
+  --chart-1: oklch(0.70 0.16 46);   /* Amber */
+  --chart-2: oklch(0.68 0.17 85);   /* Warm yellow */
+  --chart-3: oklch(0.60 0.20 30);   /* Red-orange */
+  --chart-4: oklch(0.64 0.12 190);  /* Teal */
+  --chart-5: oklch(0.60 0.15 305);  /* Purple */
+
+  --radius: 1rem;
+
   /* Sidebar */
-  --sidebar: oklch(0.06 0.01 280);
-  --sidebar-foreground: oklch(0.90 0.01 280);
-  --sidebar-primary: oklch(0.75 0.18 195);
-  --sidebar-primary-foreground: oklch(0.08 0 0);
-  --sidebar-accent: oklch(0.14 0.02 280);
+  --sidebar: oklch(0.065 0.018 40);
+  --sidebar-foreground: oklch(0.90 0.008 50);
+  --sidebar-primary: oklch(0.70 0.16 46);
+  --sidebar-primary-foreground: oklch(0.10 0 0);
+  --sidebar-accent: oklch(0.14 0.018 40);
   --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.20 0.02 280);
-  --sidebar-ring: oklch(0.75 0.18 195);
-  
-  /* Custom CREOVA Colors */
+  --sidebar-border: oklch(0.18 0.022 40);
+  --sidebar-ring: oklch(0.70 0.16 46);
+
+  /* Custom Colors */
   --success: oklch(0.70 0.18 150);
   --warning: oklch(0.75 0.15 80);
-  --info: oklch(0.70 0.16 230);
-  --cyan-glow: oklch(0.75 0.18 195);
-  --magenta-glow: oklch(0.65 0.22 330);
-  --purple-glow: oklch(0.55 0.20 280);
-  
-  /* Glass Effect Variables */
-  --glass-bg: oklch(0.12 0.01 280 / 0.6);
-  --glass-border: oklch(0.30 0.02 280 / 0.3);
-  --glass-shadow: oklch(0 0 0 / 0.4);
+  --info: oklch(0.65 0.14 220);
+  --amber-glow: oklch(0.70 0.16 46);
+  --orange-glow: oklch(0.62 0.20 35);
+  --warm-glow: oklch(0.50 0.14 50);
+
+  /* Glass */
+  --glass-bg: oklch(0.13 0.018 40 / 0.65);
+  --glass-border: oklch(0.28 0.022 40 / 0.3);
+  --glass-shadow: oklch(0 0 0 / 0.5);
 }
 
 @theme inline {
@@ -99,9 +96,9 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-info: var(--info);
-  --color-cyan-glow: var(--cyan-glow);
-  --color-magenta-glow: var(--magenta-glow);
-  --color-purple-glow: var(--purple-glow);
+  --color-amber-glow: var(--amber-glow);
+  --color-orange-glow: var(--orange-glow);
+  --color-warm-glow: var(--warm-glow);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -125,7 +122,6 @@
   }
 }
 
-/* CREOVA Custom Utilities */
 @layer utilities {
   /* Glassmorphism */
   .glass {
@@ -134,55 +130,42 @@
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
   }
-  
+
   .glass-card {
     background: linear-gradient(
       135deg,
-      oklch(0.14 0.02 280 / 0.8) 0%,
-      oklch(0.10 0.01 280 / 0.6) 100%
+      oklch(0.14 0.02 40 / 0.8) 0%,
+      oklch(0.10 0.015 40 / 0.6) 100%
     );
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border: 1px solid oklch(0.35 0.03 280 / 0.2);
-    box-shadow: 
-      0 8px 32px oklch(0 0 0 / 0.3),
-      inset 0 1px 0 oklch(1 0 0 / 0.05);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid oklch(0.28 0.022 40 / 0.25);
+    box-shadow:
+      0 8px 32px oklch(0 0 0 / 0.35),
+      inset 0 1px 0 oklch(1 0 0 / 0.04);
   }
-  
-  /* Neon Glows */
-  .glow-cyan {
-    box-shadow: 
-      0 0 20px oklch(0.75 0.18 195 / 0.3),
-      0 0 40px oklch(0.75 0.18 195 / 0.2),
-      0 0 60px oklch(0.75 0.18 195 / 0.1);
+
+  /* Warm Glows */
+  .glow-amber {
+    box-shadow:
+      0 0 20px oklch(0.70 0.16 46 / 0.3),
+      0 0 40px oklch(0.70 0.16 46 / 0.15),
+      0 0 60px oklch(0.70 0.16 46 / 0.08);
   }
-  
-  .glow-magenta {
-    box-shadow: 
-      0 0 20px oklch(0.65 0.22 330 / 0.3),
-      0 0 40px oklch(0.65 0.22 330 / 0.2),
-      0 0 60px oklch(0.65 0.22 330 / 0.1);
+
+  .glow-orange {
+    box-shadow:
+      0 0 20px oklch(0.62 0.20 35 / 0.3),
+      0 0 40px oklch(0.62 0.20 35 / 0.15),
+      0 0 60px oklch(0.62 0.20 35 / 0.08);
   }
-  
-  .glow-purple {
-    box-shadow: 
-      0 0 20px oklch(0.55 0.20 280 / 0.3),
-      0 0 40px oklch(0.55 0.20 280 / 0.2),
-      0 0 60px oklch(0.55 0.20 280 / 0.1);
+
+  .text-glow-amber {
+    text-shadow:
+      0 0 12px oklch(0.70 0.16 46 / 0.5),
+      0 0 24px oklch(0.70 0.16 46 / 0.25);
   }
-  
-  .text-glow-cyan {
-    text-shadow: 
-      0 0 10px oklch(0.75 0.18 195 / 0.5),
-      0 0 20px oklch(0.75 0.18 195 / 0.3);
-  }
-  
-  .text-glow-magenta {
-    text-shadow: 
-      0 0 10px oklch(0.65 0.22 330 / 0.5),
-      0 0 20px oklch(0.65 0.22 330 / 0.3);
-  }
-  
+
   /* Grain Overlay */
   .grain {
     position: relative;
@@ -196,8 +179,8 @@
     pointer-events: none;
     z-index: 1;
   }
-  
-  /* Animated Border */
+
+  /* Warm Gradient Border */
   .border-glow {
     position: relative;
   }
@@ -209,38 +192,31 @@
     padding: 1px;
     background: linear-gradient(
       135deg,
-      oklch(0.75 0.18 195 / 0.5),
-      oklch(0.65 0.22 330 / 0.3),
-      oklch(0.55 0.20 280 / 0.5)
+      oklch(0.70 0.16 46 / 0.5),
+      oklch(0.62 0.20 35 / 0.3),
+      oklch(0.55 0.15 50 / 0.4)
     );
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
   }
-  
-  /* Pulse Animation for Agents */
+
+  /* Pulse Animation */
   .pulse-ring {
     animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  
   @keyframes pulse-ring {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: scale(1.05);
-    }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.05); }
   }
-  
-  /* Scanning Animation */
+
+  /* Scan Line */
   .scan-line {
     position: relative;
     overflow: hidden;
@@ -255,34 +231,33 @@
     background: linear-gradient(
       90deg,
       transparent,
-      oklch(0.75 0.18 195 / 0.1),
+      oklch(0.70 0.16 46 / 0.08),
       transparent
     );
     animation: scan 3s linear infinite;
   }
-  
   @keyframes scan {
     0% { left: -100%; }
     100% { left: 100%; }
   }
-  
+
   /* Gradient Text */
   .gradient-text {
     background: linear-gradient(
       135deg,
-      oklch(0.75 0.18 195) 0%,
-      oklch(0.65 0.22 330) 50%,
-      oklch(0.55 0.20 280) 100%
+      oklch(0.75 0.16 55) 0%,
+      oklch(0.70 0.18 42) 50%,
+      oklch(0.62 0.20 30) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  
+
   /* Font Display */
   .font-display {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    letter-spacing: -0.03em;
   }
 }

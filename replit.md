@@ -43,6 +43,13 @@ Required env vars: `DATABASE_URL`, `SESSION_SECRET` (already provisioned as Repl
 - `proxy.ts` — Route protection (replaces middleware.ts in Next.js 16)
 - `drizzle.config.ts` — Points to `lib/db/schema.ts`
 
+## Design
+
+- **Theme**: Warm dark amber/brown (Habitline-inspired) — deep charcoal bg, amber/orange primary, large rounded cards
+- **Landing page**: Floating pill navbar, full-viewport hero with warm radial gradient, pill CTA buttons (white solid + glass secondary), floating preview cards, `rounded-3xl` cards throughout
+- **Color tokens**: Primary = `oklch(0.70 0.16 46)` amber; background = `oklch(0.08 0.022 40)` deep warm charcoal
+- **Border radius**: `--radius: 1rem` globally; `rounded-3xl` on feature cards and hero cards
+
 ## Architecture decisions
 
 - Webpack used instead of Turbopack (`--webpack` flag) — Turbopack fails to build Tailwind v4 CSS

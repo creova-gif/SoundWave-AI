@@ -13,6 +13,7 @@ export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login')
 
   useEffect(() => { setMounted(true) }, [])
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [name, setName] = useState('')
@@ -53,28 +54,40 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-background flex">
-      {/* Left panel — branding */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col relative overflow-hidden bg-[oklch(0.12_0.02_264)]">
-        {/* Grid overlay */}
+
+      {/* Left panel — warm branded */}
+      <div
+        className="hidden lg:flex lg:w-1/2 flex-col relative overflow-hidden"
+        style={{ background: 'oklch(0.09 0.025 40)' }}
+      >
+        {/* Warm radial gradient */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+            background: 'radial-gradient(ellipse 90% 80% at 10% 20%, oklch(0.30 0.10 44 / 0.9), transparent 60%)',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 60% 50% at 90% 85%, oklch(0.20 0.07 35 / 0.5), transparent 60%)',
+          }}
+        />
+
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)',
             backgroundSize: '40px 40px',
           }}
         />
 
-        {/* Glow orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl"
-          style={{ background: 'radial-gradient(circle, oklch(0.7 0.25 264), transparent)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full opacity-8 blur-3xl"
-          style={{ background: 'radial-gradient(circle, oklch(0.7 0.25 320), transparent)' }} />
-
         <div className="relative z-10 flex flex-col h-full p-12">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/20 border border-primary/30">
-              <Music2 className="h-5 w-5 text-primary" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
+              <Music2 className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold tracking-tight">SoundWave AI</span>
           </div>
@@ -86,14 +99,17 @@ export default function LoginPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <p className="text-sm font-medium text-primary mb-4 tracking-widest uppercase">Distribution Engine</p>
-              <h1 className="text-5xl font-bold leading-tight mb-6">
+              <p className="text-sm font-semibold text-primary mb-4 tracking-widest uppercase">
+                Distribution Engine
+              </p>
+              <h1 className="font-display text-5xl font-black leading-tight mb-6 tracking-tight">
                 Turn one song into{' '}
                 <span className="text-primary">100+ pieces</span>{' '}
                 of viral content
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-                AI agents that generate content, schedule posts, and track what actually converts — across every platform simultaneously.
+                AI agents that generate content, schedule posts, and track what actually
+                converts — across every platform simultaneously.
               </p>
             </motion.div>
 
@@ -111,8 +127,8 @@ export default function LoginPage() {
                 { icon: Globe, text: 'Real-time analytics across all your platforms' },
               ].map(({ icon: Icon, text }, i) => (
                 <div key={i} className="flex items-center gap-3 text-sm text-muted-foreground">
-                  <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 border border-primary/20">
-                    <Icon className="h-3 w-3 text-primary" />
+                  <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-xl bg-primary/15 border border-primary/20">
+                    <Icon className="h-3.5 w-3.5 text-primary" />
                   </div>
                   {text}
                 </div>
@@ -127,10 +143,11 @@ export default function LoginPage() {
       {/* Right panel — auth form */}
       <div className="flex-1 flex items-center justify-center p-6 lg:p-12">
         <div className="w-full max-w-md">
+
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/20 border border-primary/30">
-              <Music2 className="h-4 w-4 text-primary" />
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary">
+              <Music2 className="h-4.5 w-4.5 text-primary-foreground" />
             </div>
             <span className="font-bold">SoundWave AI</span>
           </div>
@@ -142,13 +159,13 @@ export default function LoginPage() {
             transition={{ duration: 0.3 }}
           >
             <div className="mb-8">
-              <h2 className="text-3xl font-bold mb-2">
+              <h2 className="font-display text-3xl font-black mb-2 tracking-tight">
                 {mode === 'login' ? 'Welcome back' : 'Get started'}
               </h2>
               <p className="text-muted-foreground">
                 {mode === 'login'
                   ? 'Sign in to your marketing command center'
-                  : 'Create your account — it\'s free'}
+                  : "Create your account — it's free"}
               </p>
             </div>
 
@@ -168,7 +185,7 @@ export default function LoginPage() {
                         placeholder="Your name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="h-11"
+                        className="h-11 rounded-xl"
                       />
                     </div>
                   </motion.div>
@@ -183,7 +200,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="h-11"
+                  className="h-11 rounded-xl"
                 />
               </div>
 
@@ -196,7 +213,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="h-11 pr-10"
+                    className="h-11 rounded-xl pr-10"
                   />
                   <button
                     type="button"
@@ -214,14 +231,19 @@ export default function LoginPage() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-2"
+                    className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-xl px-3 py-2"
                   >
                     {error}
                   </motion.div>
                 )}
               </AnimatePresence>
 
-              <Button type="submit" className="w-full h-11 font-semibold" disabled={loading}>
+              <Button
+                type="submit"
+                className="w-full h-11 font-bold rounded-xl"
+                disabled={loading}
+                style={{ background: 'oklch(0.97 0.005 60)', color: 'oklch(0.08 0.022 40)' }}
+              >
                 {loading ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
@@ -237,7 +259,7 @@ export default function LoginPage() {
               {mode === 'login' ? "Don't have an account?" : 'Already have an account?'}{' '}
               <button
                 onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError('') }}
-                className="text-primary hover:underline font-medium"
+                className="text-primary hover:underline font-semibold"
               >
                 {mode === 'login' ? 'Sign up free' : 'Sign in'}
               </button>

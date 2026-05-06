@@ -1,23 +1,13 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { PlatformIcon } from '@/components/icons/platform-icons'
 import {
-  Music,
-  Zap,
-  TrendingUp,
-  Bot,
-  BarChart3,
-  Sparkles,
-  ArrowRight,
-  Play,
-  CheckCircle2,
-  Globe,
+  Music2, Play, ArrowRight, Bot, TrendingUp, BarChart3, Sparkles,
+  Zap, Globe, CheckCircle2, Radio, Mic2,
 } from 'lucide-react'
+import { PlatformIcon } from '@/components/icons/platform-icons'
 
 const platforms = [
   { name: 'TikTok', platform: 'tiktok' as const },
@@ -32,356 +22,395 @@ const features = [
   {
     icon: Bot,
     title: 'AI-Powered Agents',
-    description: 'Autonomous agents generate viral content, schedule posts, and analyze performance 24/7',
+    description: 'Autonomous agents generate viral content, schedule posts, and analyze performance 24/7 without you lifting a finger.',
   },
   {
     icon: TrendingUp,
     title: 'Trend Detection',
-    description: 'Real-time monitoring of trending sounds, hashtags, and formats across all platforms',
+    description: 'Real-time monitoring of trending sounds, hashtags, and formats across every platform before they peak.',
   },
   {
     icon: Sparkles,
     title: 'Content Generation',
-    description: 'AI creates platform-specific captions, hashtags, and video scripts optimized for engagement',
+    description: 'AI creates platform-specific captions, hashtags, and video scripts optimized for maximum engagement.',
   },
   {
     icon: BarChart3,
     title: 'Analytics Dashboard',
-    description: 'Track reach, engagement, and progress toward your goals in real-time',
+    description: 'Track reach, engagement, and campaign progress toward your goals in one unified view.',
   },
   {
     icon: Zap,
     title: 'Automated Posting',
-    description: 'Schedule and publish content at optimal times across all platforms simultaneously',
+    description: 'Schedule and publish content at optimal times across all platforms simultaneously.',
   },
   {
     icon: Globe,
     title: 'Multi-Platform',
-    description: 'Reach audiences on TikTok, Instagram, YouTube, Twitter, Facebook, and Spotify',
+    description: 'Reach audiences on TikTok, Instagram, YouTube, Twitter, Facebook, and Spotify at once.',
   },
 ]
 
-const fadeUp = {
-  hidden: { y: 18 },
-  visible: (i = 0) => ({
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-  }),
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
-}
-
 export default function LandingPage() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="border-b border-border"
-      >
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <Music className="h-4 w-4 text-primary-foreground" />
-            </div>
-            <span className="text-lg font-semibold">SoundWave AI</span>
-          </div>
-          <nav className="hidden items-center gap-6 md:flex">
-            <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Features
-            </Link>
-            <Link href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              How It Works
-            </Link>
-            <Link href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Pricing
-            </Link>
-          </nav>
-          <Button asChild>
-            <Link href="/dashboard">
-              Launch Dashboard
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </motion.header>
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-        {/* Animated background orbs */}
+      {/* Floating pill navbar */}
+      <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4">
         <motion.div
-          className="absolute -top-40 left-1/4 h-96 w-96 rounded-full bg-primary/8 blur-3xl"
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute -bottom-20 right-1/4 h-80 w-80 rounded-full bg-chart-1/8 blur-3xl"
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.7, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-
-        <div className="container relative mx-auto px-4 text-center">
-          <motion.div variants={fadeUp} custom={0} initial="hidden" animate="visible">
-            <Badge variant="outline" className="mb-6">
-              <Zap className="mr-1 h-3 w-3 text-primary" />
-              AI-Powered Music Marketing
-            </Badge>
-          </motion.div>
-
-          <motion.h1
-            variants={fadeUp}
-            custom={1}
-            initial="hidden"
-            animate="visible"
-            className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-balance md:text-6xl lg:text-7xl"
-          >
-            Reach{' '}
-            <span className="bg-gradient-to-r from-primary to-chart-1 bg-clip-text text-transparent">
-              20 Million
-            </span>{' '}
-            People in 2 Weeks
-          </motion.h1>
-
-          <motion.p
-            variants={fadeUp}
-            custom={2}
-            initial="hidden"
-            animate="visible"
-            className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground text-pretty md:text-xl"
-          >
-            Autonomous AI agents that generate viral content, post across 6 platforms, and optimize your music marketing campaign 24/7 - without constant involvement.
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            custom={3}
-            initial="hidden"
-            animate="visible"
-            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-          >
-            <Button size="lg" asChild className="group">
-              <Link href="/dashboard">
-                <Play className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                Start Your Campaign
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg">
-              Watch Demo
-            </Button>
-          </motion.div>
-
-          {/* Platform Pills */}
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            animate="visible"
-            className="mt-12 flex flex-wrap items-center justify-center gap-3"
-          >
-            {platforms.map((platform, i) => (
-              <motion.div
-                key={platform.name}
-                variants={fadeUp}
-                custom={i}
-                whileHover={{ scale: 1.07, y: -2 }}
-                className="flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 cursor-default"
-              >
-                <PlatformIcon platform={platform.platform} size={18} />
-                <span className="text-sm">{platform.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="border-y border-border bg-card py-12">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={stagger}
-          className="container mx-auto grid gap-8 px-4 md:grid-cols-4"
+          initial={mounted ? { opacity: 0, y: -20 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-2 rounded-full bg-card/80 backdrop-blur-2xl border border-border/60 px-3 py-2 shadow-2xl"
         >
-          {[
-            { value: '24/7', label: 'Autonomous Operation' },
-            { value: '6', label: 'Platforms Supported' },
-            { value: '10-20', label: 'AI Posts Per Day' },
-            { value: '<30min', label: 'Trend Response Time' },
-          ].map((stat, i) => (
-            <motion.div key={stat.label} variants={fadeUp} custom={i} className="text-center">
-              <p className="text-3xl font-bold text-primary md:text-4xl">{stat.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
-            </motion.div>
-          ))}
+          {/* Logo pill */}
+          <div className="flex items-center gap-2 rounded-full bg-background/60 border border-border/50 px-3 py-1.5">
+            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-primary">
+              <Music2 className="h-3.5 w-3.5 text-primary-foreground" />
+            </div>
+            <span className="text-sm font-bold">SoundWave AI</span>
+          </div>
+
+          {/* Nav links */}
+          <nav className="hidden items-center md:flex">
+            {[
+              { label: 'Features', href: '#features' },
+              { label: 'How It Works', href: '#how-it-works' },
+              { label: 'Pricing', href: '#pricing' },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-full hover:bg-muted/50"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-sm font-bold text-primary-foreground hover:opacity-90 transition-opacity"
+          >
+            Launch
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Hero */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-24 px-4 overflow-hidden">
+
+        {/* Warm radial gradients */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 85% 75% at 15% 0%, oklch(0.28 0.09 44 / 0.85), transparent 58%)',
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse 55% 45% at 90% 95%, oklch(0.22 0.07 36 / 0.5), transparent 60%)',
+          }}
+        />
+
+        {/* Badge */}
+        <motion.div
+          initial={mounted ? { opacity: 0, y: 16 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="relative z-10 mb-8 flex items-center gap-2.5 rounded-full bg-card/60 backdrop-blur border border-border/50 px-4 py-2 text-sm"
+        >
+          <span className="rounded-full bg-primary px-2.5 py-0.5 text-xs font-bold text-primary-foreground">New</span>
+          <span className="text-muted-foreground">Your music reaches everywhere, automatically</span>
+        </motion.div>
+
+        {/* Giant heading */}
+        <motion.h1
+          initial={mounted ? { opacity: 0, y: 28 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 text-center font-display font-black tracking-tight text-balance leading-[1.04] text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] max-w-4xl"
+        >
+          Reach{' '}
+          <span className="text-primary">20 Million</span>
+          {' '}people{' '}
+          <br className="hidden md:block" />
+          in 2 weeks
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={mounted ? { opacity: 0, y: 18 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.35 }}
+          className="relative z-10 mt-7 max-w-lg text-center text-lg text-muted-foreground leading-relaxed"
+        >
+          Autonomous AI agents generate viral content, post across 6 platforms,
+          and optimize your campaign 24/7 — without constant involvement.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          initial={mounted ? { opacity: 0, y: 14 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="relative z-10 mt-10 flex flex-col items-center gap-3 sm:flex-row"
+        >
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 rounded-full bg-foreground px-8 py-3.5 text-sm font-bold text-background hover:opacity-90 transition-opacity shadow-lg"
+          >
+            Start Your Campaign
+          </Link>
+          <Link
+            href="#how-it-works"
+            className="flex items-center gap-2 rounded-full bg-card/60 backdrop-blur border border-border/60 px-8 py-3.5 text-sm font-semibold text-foreground hover:bg-card transition-colors"
+          >
+            <Play className="h-4 w-4 fill-current text-primary" />
+            Watch Demo
+          </Link>
+        </motion.div>
+
+        {/* Floating preview cards */}
+        <motion.div
+          initial={mounted ? { opacity: 0, y: 48 } : false}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 mt-20 flex items-end justify-center gap-4 w-full max-w-3xl"
+        >
+          {/* Left card */}
+          <div className="hidden sm:flex w-48 flex-col rounded-3xl bg-card/75 backdrop-blur-xl border border-border/50 p-5 shadow-2xl">
+            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/20">
+              <Radio className="h-5 w-5 text-primary" />
+            </div>
+            <div className="text-base font-bold leading-tight">Campaign Live</div>
+            <div className="mt-1 text-xs text-muted-foreground">6 platforms · 24/7</div>
+            <div className="mt-3 flex items-center gap-1.5">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              <span className="text-xs text-muted-foreground">4 agents active</span>
+            </div>
+          </div>
+
+          {/* Center card — main preview */}
+          <div className="flex-1 max-w-xs rounded-3xl bg-card/70 backdrop-blur-xl border border-border/50 p-5 shadow-2xl">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-xs text-muted-foreground">Today's Reach</span>
+              <span className="rounded-full bg-primary/20 px-2 py-0.5 text-xs font-semibold text-primary">+18% ↑</span>
+            </div>
+            <div className="text-3xl font-black font-display">1.94M</div>
+            <div className="mt-4 space-y-2.5">
+              {[
+                { name: 'TikTok', pct: 85 },
+                { name: 'Instagram', pct: 72 },
+                { name: 'YouTube', pct: 60 },
+              ].map((row) => (
+                <div key={row.name} className="flex items-center gap-2.5 text-xs">
+                  <span className="w-16 text-muted-foreground">{row.name}</span>
+                  <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-primary"
+                      style={{ width: `${row.pct}%` }}
+                    />
+                  </div>
+                  <span className="w-7 text-right text-muted-foreground">{row.pct}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right card */}
+          <div className="hidden sm:flex w-48 flex-col rounded-3xl bg-card/75 backdrop-blur-xl border border-border/50 p-5 shadow-2xl">
+            <div className="text-xs text-muted-foreground mb-1">Content generated</div>
+            <div className="text-3xl font-black font-display">142</div>
+            <div className="text-xs text-muted-foreground mt-0.5">posts this week</div>
+            <div className="mt-4 grid grid-cols-3 gap-1.5">
+              {[
+                { label: 'Viral', pct: 82 },
+                { label: 'Posts', pct: 94 },
+                { label: 'Reels', pct: 77 },
+              ].map((item) => (
+                <div key={item.label} className="text-center">
+                  <div className="flex h-9 w-9 mx-auto items-center justify-center rounded-xl bg-primary/15 text-xs font-bold text-primary">
+                    {item.pct}%
+                  </div>
+                  <div className="mt-1 text-[10px] text-muted-foreground">{item.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 md:py-32">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-            className="text-center"
-          >
-            <motion.div variants={fadeUp}>
-              <Badge variant="outline" className="mb-4">Features</Badge>
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight md:text-4xl">
-              Everything You Need for Viral Growth
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-              A complete agentic system that handles content creation, posting, and analytics automatically
-            </motion.p>
-          </motion.div>
+      {/* Stats bar */}
+      <section className="border-y border-border/50 bg-card/30 py-12">
+        <div className="container mx-auto grid gap-8 px-6 text-center sm:grid-cols-2 md:grid-cols-4">
+          {[
+            { value: '24/7', label: 'Autonomous Operation' },
+            { value: '6', label: 'Platforms Supported' },
+            { value: '10–20', label: 'AI Posts Per Day' },
+            { value: '<30 min', label: 'Trend Response Time' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="text-4xl font-black font-display text-primary">{stat.value}</div>
+              <div className="mt-1.5 text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-            className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {features.map((feature, i) => (
-              <motion.div key={feature.title} variants={fadeUp} custom={i}>
-                <Card className="h-full transition-colors hover:border-primary/30 hover:bg-card/80">
-                  <CardContent className="pt-6">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                      <feature.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold">{feature.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">{feature.description}</p>
-                  </CardContent>
-                </Card>
+      {/* Features */}
+      <section id="features" className="py-28 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="mb-16 text-center">
+            <div className="mb-6 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+              Features
+            </div>
+            <h2 className="font-display text-4xl font-black tracking-tight md:text-5xl">
+              Everything you need for viral growth
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+              A complete agentic system that handles content creation, posting, and analytics automatically
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <motion.div
+                key={f.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-3xl border border-border/60 bg-card p-6 transition-colors hover:border-primary/30"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/15">
+                  <f.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-lg font-bold">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.description}</p>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="border-t border-border bg-card py-20 md:py-32">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-            className="text-center"
-          >
-            <motion.div variants={fadeUp}>
-              <Badge variant="outline" className="mb-4">How It Works</Badge>
-            </motion.div>
-            <motion.h2 variants={fadeUp} className="text-3xl font-bold tracking-tight md:text-4xl">
-              From Setup to Viral in 3 Steps
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            variants={stagger}
-            className="mt-16 grid gap-8 md:grid-cols-3"
-          >
+      <section id="how-it-works" className="border-y border-border/50 bg-card/30 py-28 px-4">
+        <div className="container mx-auto max-w-4xl text-center">
+          <div className="mb-6 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+            How It Works
+          </div>
+          <h2 className="font-display text-4xl font-black tracking-tight md:text-5xl mb-16">
+            From setup to viral in 3 steps
+          </h2>
+          <div className="grid gap-12 md:grid-cols-3">
             {[
               {
                 step: '1',
                 title: 'Connect Your Platforms',
-                description: 'Link your TikTok, Instagram, YouTube, Twitter, Facebook, and Spotify accounts',
+                description: 'Link your TikTok, Instagram, YouTube, Twitter, Facebook, and Spotify accounts in minutes.',
               },
               {
                 step: '2',
                 title: 'Launch Your Campaign',
-                description: 'Upload your music, set your goals, and activate the AI agents',
+                description: 'Upload your music, set your goals, and activate the AI agents with one click.',
               },
               {
                 step: '3',
                 title: 'Watch It Grow',
-                description: 'Monitor real-time analytics as your agents work autonomously to maximize reach',
+                description: 'Monitor real-time analytics as your agents work autonomously to maximize reach.',
               },
-            ].map((item, i) => (
-              <motion.div key={item.step} variants={fadeUp} custom={i} className="text-center">
-                <motion.div
-                  whileHover={{ scale: 1.08 }}
-                  className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground"
+            ].map((item) => (
+              <div key={item.step} className="flex flex-col items-center">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary font-display text-xl font-black text-primary-foreground shadow-lg"
+                  style={{ boxShadow: '0 8px 32px oklch(0.70 0.16 46 / 0.35)' }}
                 >
                   {item.step}
-                </motion.div>
-                <h3 className="text-lg font-semibold">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.description}</p>
-              </motion.div>
+                </div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 md:py-32">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <Card className="relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-chart-1/10" />
-              <CardContent className="relative py-16 text-center">
-                <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-                  Ready to Go Viral?
-                </h2>
-                <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-                  Start your autonomous marketing campaign today and let AI agents handle the heavy lifting
-                </p>
-                <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-                  <Button size="lg" asChild className="group">
-                    <Link href="/dashboard">
-                      Launch Dashboard
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
-                </div>
-                <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <CheckCircle2 className="h-4 w-4 text-success" />
-                    No credit card required
+      {/* Platform pills */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto text-center">
+          <p className="mb-6 text-sm text-muted-foreground">Works with all major platforms</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {platforms.map((p) => (
+              <div
+                key={p.name}
+                className="flex items-center gap-2 rounded-full border border-border/60 bg-card px-5 py-2.5 text-sm font-medium"
+              >
+                <PlatformIcon platform={p.platform} size={16} />
+                {p.name}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section id="pricing" className="py-24 px-4">
+        <div className="container mx-auto max-w-3xl">
+          <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-card p-12 text-center">
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: 'radial-gradient(ellipse 80% 70% at 50% 110%, oklch(0.28 0.09 44 / 0.55), transparent 65%)',
+              }}
+            />
+            <div className="relative z-10">
+              <div className="mb-6 inline-flex items-center rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+                Get Started Free
+              </div>
+              <h2 className="font-display text-4xl font-black tracking-tight md:text-5xl">
+                Ready to go viral?
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+                Start your autonomous marketing campaign today and let AI agents handle the heavy lifting
+              </p>
+              <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                <Link
+                  href="/dashboard"
+                  className="flex items-center gap-2 rounded-full bg-foreground px-9 py-3.5 text-sm font-bold text-background hover:opacity-90 transition-opacity shadow-lg"
+                >
+                  Launch Dashboard
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-5 text-sm text-muted-foreground">
+                {['No credit card required', 'Demo mode included', 'Connect your own APIs'].map((item) => (
+                  <div key={item} className="flex items-center gap-1.5">
+                    <CheckCircle2 className="h-4 w-4 text-green-500" />
+                    {item}
                   </div>
-                  <div className="flex items-center gap-1">
-                    <CheckCircle2 className="h-4 w-4 text-success" />
-                    Demo mode included
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <CheckCircle2 className="h-4 w-4 text-success" />
-                    Connect your own APIs
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 text-center md:flex-row md:text-left">
+      <footer className="border-t border-border/50 py-8 px-4">
+        <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex items-center gap-2">
-            <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary">
-              <Music className="h-3 w-3 text-primary-foreground" />
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
+              <Music2 className="h-3.5 w-3.5 text-primary-foreground" />
             </div>
-            <span className="text-sm font-medium">SoundWave AI</span>
+            <span className="text-sm font-bold">SoundWave AI</span>
           </div>
-          <p className="text-sm text-muted-foreground">
-            Built with AI SDK, Next.js, and Vercel
-          </p>
+          <p className="text-sm text-muted-foreground">© 2026 SoundWave AI. Built with AI SDK & Next.js</p>
         </div>
       </footer>
     </div>
