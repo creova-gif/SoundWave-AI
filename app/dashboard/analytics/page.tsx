@@ -42,9 +42,10 @@ export default function AnalyticsPage() {
     { name: 'Shares', value: 24567, change: 28.9, icon: Share2 },
   ]
 
+  const hourlyEngagementValues = [480, 320, 260, 230, 250, 380, 640, 870, 940, 810, 730, 690, 760, 830, 910, 990, 1120, 1270, 1190, 1090, 960, 790, 630, 510]
   const hourlyData = Array.from({ length: 24 }, (_, i) => ({
     hour: `${i}:00`,
-    engagement: Math.floor(Math.random() * 1000) + 200,
+    engagement: hourlyEngagementValues[i],
   }))
 
   const formatNumber = (num: number) => {
