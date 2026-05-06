@@ -5,8 +5,8 @@ AI-powered music marketing command center that autonomously generates content, p
 ## Run & Operate
 
 - `npm run dev` — starts Next.js dev server on port 5000 (webpack mode)
-- `npm run build` — production build
-- `npm run start` — production server
+- `npm run build` — production build (webpack mode, required — Turbopack breaks CSS)
+- `npm run start` — production server on port 5000
 
 ## Stack
 

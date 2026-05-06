@@ -10,7 +10,16 @@ import type {
 } from './types'
 
 // Mock data for demonstration - replace with Supabase when connected
-const generateId = () => Math.random().toString(36).substring(2, 15)
+let _idCounter = 1
+const generateId = () => `id-${_idCounter++}`
+
+// Fixed reference point so server and client render identical data
+const REF = new Date('2026-05-06T19:00:00.000Z')
+const ago = (ms: number) => new Date(REF.getTime() - ms)
+const from = (ms: number) => new Date(REF.getTime() + ms)
+const H = 3600000
+const M = 60000
+const D = 86400000
 
 // Sample song
 const sampleSong: Song = {
@@ -31,13 +40,13 @@ const sampleCampaign: Campaign = {
   songId: 'song-1',
   song: sampleSong,
   status: 'active',
-  startDate: new Date(),
-  endDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 14 days
+  startDate: REF,
+  endDate: from(14 * D),
   targetReach: 20000000,
   currentReach: 2847293,
   budget: 500,
   platforms: ['tiktok', 'instagram', 'youtube', 'twitter', 'facebook', 'spotify'],
-  createdAt: new Date(),
+  createdAt: REF,
 }
 
 // Sample content queue
@@ -50,8 +59,8 @@ const sampleContent: ContentItem[] = [
     content: 'POV: You found your new summer anthem. This beat hits different at sunset.',
     hashtags: ['#SummerVibes', '#NewMusic', '#TikTokMusic', '#Viral', '#FYP'],
     status: 'approved',
-    scheduledFor: new Date(Date.now() + 2 * 60 * 60 * 1000),
-    createdAt: new Date(),
+    scheduledFor: from(2 * H),
+    createdAt: REF,
   },
   {
     id: 'content-2',
@@ -61,8 +70,8 @@ const sampleContent: ContentItem[] = [
     content: 'New track just dropped. Link in bio.',
     hashtags: ['#NewMusic', '#SummerVibes', '#InstaMusic', '#Explore'],
     status: 'pending',
-    scheduledFor: new Date(Date.now() + 4 * 60 * 60 * 1000),
-    createdAt: new Date(),
+    scheduledFor: from(4 * H),
+    createdAt: REF,
   },
   {
     id: 'content-3',
@@ -72,7 +81,7 @@ const sampleContent: ContentItem[] = [
     content: 'Just dropped something special. RT if you feel it.',
     hashtags: ['#NewMusic', '#NowPlaying'],
     status: 'pending',
-    createdAt: new Date(),
+    createdAt: REF,
   },
 ]
 
@@ -85,16 +94,8 @@ const samplePosts: Post[] = [
     platform: 'tiktok',
     platformPostId: 'tt-123456',
     status: 'posted',
-    postedAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
-    engagement: {
-      views: 1247893,
-      likes: 89234,
-      comments: 4521,
-      shares: 12847,
-      saves: 34521,
-      clicks: 8934,
-      reach: 1456789,
-    },
+    postedAt: ago(6 * H),
+    engagement: { views: 1247893, likes: 89234, comments: 4521, shares: 12847, saves: 34521, clicks: 8934, reach: 1456789 },
   },
   {
     id: 'post-2',
@@ -103,16 +104,8 @@ const samplePosts: Post[] = [
     platform: 'instagram',
     platformPostId: 'ig-789012',
     status: 'posted',
-    postedAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
-    engagement: {
-      views: 456123,
-      likes: 34521,
-      comments: 1234,
-      shares: 5678,
-      saves: 12345,
-      clicks: 3456,
-      reach: 567890,
-    },
+    postedAt: ago(12 * H),
+    engagement: { views: 456123, likes: 34521, comments: 1234, shares: 5678, saves: 12345, clicks: 3456, reach: 567890 },
   },
   {
     id: 'post-3',
@@ -121,16 +114,8 @@ const samplePosts: Post[] = [
     platform: 'youtube',
     platformPostId: 'yt-345678',
     status: 'posted',
-    postedAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    engagement: {
-      views: 234567,
-      likes: 12345,
-      comments: 567,
-      shares: 2345,
-      saves: 5678,
-      clicks: 8901,
-      reach: 345678,
-    },
+    postedAt: ago(24 * H),
+    engagement: { views: 234567, likes: 12345, comments: 567, shares: 2345, saves: 5678, clicks: 8901, reach: 345678 },
   },
 ]
 
@@ -143,7 +128,7 @@ const sampleLogs: AgentLog[] = [
     action: 'Generated new content',
     details: 'Created 5 TikTok captions with viral hooks',
     status: 'success',
-    timestamp: new Date(Date.now() - 30 * 60 * 1000),
+    timestamp: ago(30 * M),
   },
   {
     id: 'log-2',
@@ -152,7 +137,7 @@ const sampleLogs: AgentLog[] = [
     action: 'Posted to TikTok',
     details: 'Successfully posted content-1 at optimal time (6 PM EST)',
     status: 'success',
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    timestamp: ago(2 * H),
   },
   {
     id: 'log-3',
@@ -161,7 +146,7 @@ const sampleLogs: AgentLog[] = [
     action: 'Performance analysis',
     details: 'TikTok post trending! Engagement rate 7.2% above average',
     status: 'success',
-    timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000),
+    timestamp: ago(1 * H),
   },
   {
     id: 'log-4',
@@ -170,35 +155,37 @@ const sampleLogs: AgentLog[] = [
     action: 'Strategy adjustment',
     details: 'Increasing TikTok post frequency based on performance',
     status: 'info',
-    timestamp: new Date(Date.now() - 15 * 60 * 1000),
+    timestamp: ago(15 * M),
   },
 ]
 
 // Platform credentials
+const syncedAt = ago(20 * M)
 const sampleCredentials: PlatformCredential[] = [
-  { platform: 'tiktok', connected: true, username: '@yourartist', followers: 125000, lastSynced: new Date() },
-  { platform: 'instagram', connected: true, username: '@yourartist', followers: 89000, lastSynced: new Date() },
-  { platform: 'youtube', connected: true, username: 'Your Artist', followers: 45000, lastSynced: new Date() },
-  { platform: 'twitter', connected: true, username: '@yourartist', followers: 32000, lastSynced: new Date() },
+  { platform: 'tiktok', connected: true, username: '@yourartist', followers: 125000, lastSynced: syncedAt },
+  { platform: 'instagram', connected: true, username: '@yourartist', followers: 89000, lastSynced: syncedAt },
+  { platform: 'youtube', connected: true, username: 'Your Artist', followers: 45000, lastSynced: syncedAt },
+  { platform: 'twitter', connected: true, username: '@yourartist', followers: 32000, lastSynced: syncedAt },
   { platform: 'facebook', connected: false },
-  { platform: 'spotify', connected: true, username: 'Your Artist', followers: 67000, lastSynced: new Date() },
+  { platform: 'spotify', connected: true, username: 'Your Artist', followers: 67000, lastSynced: syncedAt },
 ]
 
-// Analytics data for charts (last 14 days)
+// Analytics data for charts (last 14 days) — deterministic, no Math.random()
+const reachValues = [112000, 198000, 245000, 310000, 289000, 402000, 487000, 521000, 468000, 534000, 612000, 578000, 690000, 748000]
+const engagementValues = [7300, 12800, 15900, 20100, 18700, 26100, 31600, 33800, 30400, 34700, 39800, 37600, 44900, 48600]
+const postsPerDay = [7, 8, 6, 9, 7, 10, 8, 9, 7, 10, 11, 8, 9, 10]
+
 const generateAnalyticsData = (): AnalyticsData[] => {
-  const data: AnalyticsData[] = []
-  for (let i = 13; i >= 0; i--) {
-    const date = new Date()
-    date.setDate(date.getDate() - i)
-    const baseReach = 100000 + Math.random() * 500000
-    data.push({
+  return Array.from({ length: 14 }, (_, i) => {
+    const date = new Date(REF)
+    date.setUTCDate(date.getUTCDate() - (13 - i))
+    return {
       date: date.toISOString().split('T')[0],
-      reach: Math.floor(baseReach * (1 + (13 - i) * 0.15)), // Growing trend
-      engagement: Math.floor(baseReach * 0.065 * (0.8 + Math.random() * 0.4)),
-      posts: Math.floor(6 + Math.random() * 8),
-    })
-  }
-  return data
+      reach: reachValues[i],
+      engagement: engagementValues[i],
+      posts: postsPerDay[i],
+    }
+  })
 }
 
 // Store state
