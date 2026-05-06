@@ -6,6 +6,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  allowedDevOrigins: [
+    '*.replit.dev',
+    '*.worf.replit.dev',
+    '*.repl.co',
+  ],
   webpack: (config) => {
     config.module.rules.forEach((rule) => {
       if (rule.oneOf) {
