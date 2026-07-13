@@ -50,8 +50,8 @@ Independent artists don't fail because of bad music — they fail because of no 
 ### Installation
 
 ```bash
-git clone https://github.com/creova-gif/SoundWave-AI.git
-cd SoundWave-AI
+git clone https://github.com/creova-gif/soundwave-ai.git
+cd soundwave-ai
 npm install
 ```
 
